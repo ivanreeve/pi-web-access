@@ -1,0 +1,183 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-ibm-plex-mono);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --font-ibm-plex-mono: var(--font-ibm-plex-mono);
+  --font-jetbrains-mono: var(--font-jetbrains-mono);
+  --font-noto-sans: var(--font-noto-sans);
+  --font-inter: var(--font-inter);
+}
+
+:root {
+  --font-inter: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-ibm-plex-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-jetbrains-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-noto-sans: "Noto Sans", sans-serif;
+  --radius: 0px;
+  --background: #000000;
+  --foreground: #F5F5F5;
+  --card: #121212;
+  --card-foreground: #FAFAFA;
+  --popover: #121212;
+  --popover-foreground: #FAFAFA;
+  --primary: #E5E5E5;
+  --primary-foreground: #121212;
+  --secondary: #1F1F1F;
+  --secondary-foreground: #FAFAFA;
+  --muted: #1F1F1F;
+  --muted-foreground: #A1A1A1;
+  --accent: #1F1F1F;
+  --accent-foreground: #FAFAFA;
+  --destructive: #E5484D;
+  --border: rgba(255, 255, 255, 0.10);
+  --input: rgba(255, 255, 255, 0.15);
+  --ring: #737373;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-none;
+    box-sizing: border-box;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-noto-sans), sans-serif;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-inter), sans-serif;
+  }
+}
+
+html::selection,
+body::selection,
+*::selection {
+  background-color: #fff;
+  color: #000;
+}
+
+.brand-gradient {
+  background-image: linear-gradient(to right, #37D7FA, #4991FC, #FF8DF2, #FF8705);
+  background-size: 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.brand-gradient-text {
+  background-image: linear-gradient(to right, #37D7FA, #4991FC, #FF8DF2, #FF8705);
+  background-size: 100% 100%;
+  background-position: 0% 50%;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.brand-gradient-surface {
+  background-image: linear-gradient(to right, #37D7FA, #4991FC, #FF8DF2, #FF8705);
+  background-size: 100% 100%;
+}
+
+.brand-gradient-loading {
+  background-image: linear-gradient(to right, #37D7FA, #4991FC, #FF8DF2, #FF8705);
+  background-size: 200% 100%;
+  transform: translateX(-100%);
+}
+
+.brand-gradient-loading.is-animating {
+  animation: brand-loading 1.4s ease-in-out infinite;
+}
+
+@keyframes brand-loading {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(200%);
+  }
+}
+
+/* Hide scrollbars */
+::-webkit-scrollbar {
+  display: none;
+  width: 0px;
+  background: transparent;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+  width: 0px;
+  background: transparent;
+}
+
+html, body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Custom Markdown styling to replace missing tailwind typography plugin classes */
+.prose p {
+  @apply mb-4 leading-relaxed text-zinc-300;
+}
+
+.prose p:last-child {
+  @apply mb-0;
+}
+
+.prose ul {
+  @apply mb-4 pl-5 list-disc flex flex-col gap-2 text-zinc-300;
+}
+
+.prose ol {
+  @apply mb-4 pl-5 list-decimal flex flex-col gap-2 text-zinc-300;
+}
+
+.prose li {
+  @apply leading-relaxed;
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  @apply font-bold mt-6 mb-3 text-foreground tracking-tight;
+}
+
+.prose h1 { @apply text-xl; }
+.prose h2 { @apply text-lg; }
+.prose h3 { @apply text-base; }
+
+.prose code {
+  @apply font-mono bg-zinc-900 px-1.5 py-0.5 text-xs text-zinc-200 border border-white/5 rounded-none;
+}
+
+.prose pre {
+  @apply bg-zinc-950 border border-white/10 p-4 mb-4 overflow-x-auto rounded-none;
+}
+
+.prose pre code {
+  @apply p-0 bg-transparent border-none text-xs text-zinc-300;
+}
+
+.prose a {
+  @apply text-white underline decoration-white/30 hover:decoration-white transition-all;
+}

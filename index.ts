@@ -277,6 +277,7 @@ interface PendingCurate {
 	phase: "searching" | "curating";
 	workflow: CuratorWorkflow;
 	summaryContext: SummaryGenerationContext;
+	extensionContext: ExtensionContext;
 	searchResults: Map<number, QueryResultData>;
 	allInlineContent: ExtractedContent[];
 	queryList: string[];
@@ -1116,7 +1117,7 @@ export default function (pi: ExtensionAPI) {
 								domainFilter: pc.domainFilter,
 								includeContent: pc.includeContent,
 								signal: addSearchSignal,
-								extensionContext: ctx,
+								extensionContext: pc.extensionContext,
 							});
 							if (pendingCurates.get(callId) !== pc) throw new Error("Curator session is no longer active.");
 							pc.searchResults.set(queryIndex, { query, answer, results, error: null, provider: actualProvider });
@@ -1339,6 +1340,7 @@ export default function (pi: ExtensionAPI) {
 					phase: "searching",
 					workflow: curatorWorkflow,
 					summaryContext,
+					extensionContext: ctx,
 					searchResults,
 					allInlineContent,
 					queryList,
